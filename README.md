@@ -20,4 +20,9 @@ When you first log in to the UI you are at the HQ level of Lenses. At this level
 
 For this class however, we will be working one level down on an individual cluster, known as the Workspace level. From the HQ level you can drill down into an individual cluster to topic by hovering over an entry in the list and then clicking on the arrow that appears on the far right of the entry. 
 
+![screenshot of Lenses Environments with the drilldown arrow showing](/images/drill-down-to-work.png)
+
+### Lab 2 - Working with Workspaces / Individual Clusters
+
+
 
