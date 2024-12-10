@@ -53,5 +53,26 @@ We have a comprehensive guide to the Lenses SQL Studio [here in the docs](https:
 
 ![screenshot of SQL studio results](/images/sql-studio2.png)
 
+### Lab 4 - Working with Data Policies
 
+Kafka streams are full of different types of sensitive data: customer data, internal data, etc. Lenses give you the ability to easily mask this data from full view by your engineers while still allowing them full access to the Topics for discovery and troubleshooting. 
+
+Let's setup a data policy to mask the serial number data that is currently visibile in our data. If you take a look inside the `backblaze_smart` topic you'll see the serial numbers shown fully. 
+
+![screenshot of the unmasked serial number](/images/unmasked-serial.png)
+
+Go to the Data Policies section of your Workspace and click on the New Policy button. Fill out the form:
+
+Name: Serial Screening
+Redaction: All
+Category: Brand Security (Be sure to hit return here to move on the to next field, otherwise the UI will complain.)
+Impact Type: Medium
+Affected Datasets: Do not change. Leave as "*"
+Add Fields: serial_number (Be sure to hit return here to move on the to next field, otherwise the UI will complain.)
+
+![screenshot of policy dialog box](/images/policy-box.png)
+
+When you're all done hit the Create New Policy button. Then go back to your topics view and drill down `backblaze_smart` and check to make sure that your serial number field is now being blocked. 
+
+![screenshot of blocked serial number](/images/blocked-serial.png)
 
