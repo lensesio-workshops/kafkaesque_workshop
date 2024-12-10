@@ -26,7 +26,7 @@ For this class however, we will be working one level down on an individual clust
 
 Now that we've drilled down into our Kafka cluster we are at the main view of the Cluster/Workspace. This view will give you information about the overall state of the cluster and the data flows. 
 
-![screenshot of Lenses Workspace dashboard](/images/workspace-dashboard.png)
+![screenshot of Lenses Workspace dashboard](/images/dashboard.png)
 
 
 
