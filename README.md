@@ -40,8 +40,18 @@ Now you can point your coworker quickly in the right direction for his executive
 
 ### Lab 3 - Working with SQL Studio
 
-Lenses comes with a handy SQL Studio desgined to allow you to explore and manupliate your topics all from one central locaiton. Let's run a basic search to understand the basics. 
+Lenses comes with a handy SQL Studio desgined to allow you to explore and manupliate your topics all from one central locaiton. Let's run a basic search to understand the basics. Let's run a simple search drilling down on our taxi fare data.
 
+```
+SELECT VendorID, fare_amount, payment_type
+FROM nyc_yellow_taxi_trip_data
+WHERE _meta.timestamp > NOW() - "5m";
+```
+Note that we're using the `WHERE _meta.timestam` clause to limit our results. This isn't required, but is a best practice when working with what could be multiple gigabytes of returned results. 
+
+We have a comprehensive guide to the Lenses SQL Studio [here in the docs](https://docs.lenses.io/latest/user-guide/sql-studio). It's quite powerful and can even be used to create new topics based on SQL output. (Beyond the scope of this introductory course.)
+
+![screenshot of SQL studio results](/images/sql-studio2.png)
 
 
 
