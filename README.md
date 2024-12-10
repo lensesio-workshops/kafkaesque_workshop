@@ -26,8 +26,21 @@ For this class however, we will be working one level down on an individual clust
 
 Now that we've drilled down into our Kafka cluster we are at the main view of the Cluster/Workspace. This view will give you information about the overall state of the cluster and the data flows. 
 
-![screenshot of Lenses Workspace dashboard](/images/dashboard.png)
+![screenshot of Lenses Workspace dashboard](/images/dashboard1.png)
 
+Let's take a look at the topics in cluster by clicking on the Topics link in the sidebar. You can browse and drill down into individual topics here as well as search topics and schemas by keyword. 
+
+Scenario: You're helping a coworker build a status dashboard for company executives. He told you that executives like dashboards with maps so he's looking for data streams with location data in them to use for his dashboard. 
+
+Let's do a few searches to figure out which topics have location data for him to use. In the search bar for topics type in the keyword "latitude". Be sure that "Search in Schema" is checked. Your results should look something like this:
+
+![screenshot of Topics search results](/images/latitude-search.png)
+
+Now you can point your coworker quickly in the right direction for his executive dashboards.
+
+### Lab 3 - Working with SQL Studio
+
+Lenses comes with a handy SQL Studio desgined to allow you to explore and manupliate your topics all from one central locaiton. Let's run a basic search to understand the basics. 
 
 
 
