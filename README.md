@@ -46,15 +46,27 @@ Let's do a few searches to figure out which topics have location data for him to
 
 Now you can point your coworker quickly in the right direction for his executive dashboards.
 
-### Lab 3 - Working with SQL Studio
+### Lab 2 - Working with SQL Studio
 
-Lenses comes with a handy SQL Studio desgined to allow you to explore and manupliate your topics all from one central locaiton. Let's run a basic search to understand the basics. Let's run a simple search drilling down on our taxi fare data.
+Lenses comes with a handy SQL Studio desgined to allow you to explore and manupliate your topics all from one central locaiton. Hover over the nyc_yellow_taxi_trip_data topic and click on the SQL button. This will open up that topic in the SQL Studio. 
+
+Lenses will automatically run a simple search that surfaces the last 10 events from each partition in the topic. You can view the events in Grid form, but you can also toggle to List to see them more in a JSON style format. Take a look at the different events in the list below.
+
+Now we're going to craft a search that focuses on just the vendors, their fares, and what type of payment was used. 
+
+Delete the search that was initially run and type in the following. 
 
 ```
 SELECT VendorID, fare_amount, payment_type
 FROM nyc_yellow_taxi_trip_data
-WHERE _meta.timestamp > NOW() - "5m";
 ```
+
+Once you have it typed in, click on the time range picker on the right hand side and click on the "Last 5 Minutes" selection. This will automatically add a time range limiter to your search and run the search.
+
+Your results should look something like this:
+
+![screenshot of search results](images/search-results.jpg)
+
 Note that we're using the `WHERE _meta.timestam` clause to limit our results. This isn't required, but is a best practice when working with what could be multiple gigabytes of returned results. 
 
 We have a comprehensive guide to the Lenses SQL Studio [here in the docs](https://docs.lenses.io/latest/user-guide/sql-studio). It's quite powerful and can even be used to create new topics based on SQL output. (Beyond the scope of this introductory course.)
