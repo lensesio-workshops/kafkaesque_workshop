@@ -106,3 +106,50 @@ When you're all done hit the Create New Policy button. Then go back to your topi
 
 ![screenshot of blocked serial number](/images/blocked-serial.png)
 
+### Lab 4 - Filtering a Poison Pill
+
+Scenario: The taxi fare app has been glitching and recording fares with negative amounts. We need to find these events and filter them out of our taxi fare data and send them to a special topic so they can be reprocessed with the correct fare amount. 
+
+First let's identify all the events with negative fare amounts. Open up the nyc_yellow_taxi_trip_data in SQL Studio and run the following command: 
+
+```
+SELECT *
+FROM nyc_yellow_taxi_trip_data
+WHERE fare_amount < 0
+```
+
+There are quite a few "poison pill" events in our feed. Let's build a Lenses SQL Processor to send them off to a special DLQ (dead letter queue) where they can be reprocessed and corrected. 
+
+To do this we will need to drill down into the cluster. Leave SQL Studio and drill down into the specific cluster level. Then click on Apps. This will take you to the Apps page where you can add and manage external applications that interact with Kafka. 
+
+Click on the "Create SQL Processor" button to start to make our new SQL processor. 
+
+First up give your SQL Processor a name: taxi-poison-pill-filter
+
+Then we will add the following SQL statement:
+
+```
+-- Create target topic(s) if they do not exist
+SET defaults.topic.autocreate=true;
+
+INSERT INTO taxi-negative-fares
+SELECT STREAM *
+FROM nyc_yellow_taxi_trip_data
+WHERE fare_amount < 0;
+```
+Then click on Create Processor. Note we are using demo Community Edition, normally in the "real world" SQL Processors get deployed to Kubernetes. 
+
+Once the processor has been created click on the big green button that says "Start Processor" and watch as it comes to life.
+
+Once the process is running, you can go and check on the new topic. You should now see a new topic called taxi-negative-fares in your topics list. Hover over it and click on SQL. This will bring up a smapling of the events in our new topic. Note that they all have negative fare amounts. 
+
+![value fare amount view](images/value-fare-amount.jpg)
+
+Nice work, now we can send those bad events to be reprocessed.
+
+When you create a SQL Processor in Lenses it automatically adds it to the Topology View. Drill back down into your cluster and click on Topology. You should now see your SQL Processor with its source topic and its destination topic. 
+
+![topology view](images/topology.jpg)
+
+
+
