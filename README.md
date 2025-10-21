@@ -12,6 +12,17 @@ User name: admin
 
 Password:  admin
 
+The next screen you will see will ask you to verify your email. No need for this training, though you are welcome to do it if you like.
+
+![screenshot of Community Edition verified screen](https://github.com/lensesio-workshops/Community_Lenses_Setup/blob/main/images/verified.jpg)
+
+Click on Already verified? And enter the following:
+
+Email: drew.oetzel@lenses.io
+
+Activation Code: 1131
+
+![screenshot of Community Edition verified screen filled out](https://github.com/lensesio-workshops/Community_Lenses_Setup/blob/main/images/verified-filled-out.jpg)
 Now that you're all logged in, take a few moments to explore the Lenses 6 UI. 
 
 When you first log in to the UI you are at the HQ level of Lenses. At this level you can work with multiple Kafka clusters at the same time. You can search for clusters by name or search across all clusters' topics and schemas by key words. You can also use the Global SQL Studio at this level. You can access these views via the icons down the side of the UI. 
