@@ -151,5 +151,9 @@ When you create a SQL Processor in Lenses it automatically adds it to the Topolo
 
 ![topology view](images/topology.jpg)
 
+### Challenge Lab - Filtering a Poison Pill
+
+Build a SQL Processor that filters only the non-poison pill events so our consumers don't get harmed by the tainted main topic. 
+
 
 
