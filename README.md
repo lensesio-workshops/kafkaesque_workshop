@@ -67,13 +67,25 @@ Your results should look something like this:
 
 ![screenshot of search results](images/search-results.jpg)
 
-Note that we're using the `WHERE _meta.timestam` clause to limit our results. This isn't required, but is a best practice when working with what could be multiple gigabytes of returned results. 
+Scenario: You are building a application that looks for taxi fare fraud in the system. Let's use SQL Studio to search for events that could be fradulent. For example a trip with a distance of 0 but a fare amount greater than 0.
+
+Craft the following search in SQL studio and hit run:
+
+```
+SELECT *
+FROM nyc_yellow_taxi_trip_data
+WHERE trip_distance = 0 AND fare_amount > 0
+LIMIT 100;
+```
+
+Looks like there's a lot of possible fraud for our new application to surface!! 
+
 
 We have a comprehensive guide to the Lenses SQL Studio [here in the docs](https://docs.lenses.io/latest/user-guide/sql-studio). It's quite powerful and can even be used to create new topics based on SQL output. (Beyond the scope of this introductory course.)
 
 ![screenshot of SQL studio results](/images/sql-studio2.png)
 
-### Lab 4 - Working with Data Policies
+### Lab 3 - Working with Data Policies
 
 Kafka streams are full of different types of sensitive data: customer data, internal data, etc. Lenses give you the ability to easily mask this data from full view by your engineers while still allowing them full access to the Topics for discovery and troubleshooting. 
 
