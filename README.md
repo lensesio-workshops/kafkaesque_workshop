@@ -4,7 +4,7 @@
 
 Using your student lab sheet point your favorite web browser to the IP address listed.
 
-`http://{IP from sheet}:9991`
+`https://studentXX.lenses-edu.com` the XX's here are your student number. You have to replace them with your student number
 
 ![screenshot of Community Edition login page](https://github.com/lensesio-workshops/Community_Lenses_Setup/blob/main/images/login_page.png)
 
