@@ -81,9 +81,7 @@ LIMIT 100;
 Looks like there's a lot of possible fraud for our new application to surface!! 
 
 
-We have a comprehensive guide to the Lenses SQL Studio [here in the docs](https://docs.lenses.io/latest/user-guide/sql-studio). It's quite powerful and can even be used to create new topics based on SQL output. (Beyond the scope of this introductory course.)
-
-![screenshot of SQL studio results](/images/sql-studio2.png)
+We have a comprehensive guide to the Lenses SQL Studio [here in the docs](https://docs.lenses.io/latest/user-guide/sql-studio). It's quite powerful and can even be used to create new topics based on SQL output.
 
 ### Lab 3 - Working with Data Policies
 
