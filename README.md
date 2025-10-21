@@ -22,7 +22,7 @@ Email: drew.oetzel@lenses.io
 
 Activation Code: 1131
 
-[![screenshot of Community Edition verified screen filled out](https://github.com/lensesio-workshops/Community_Lenses_Setup/blob/main/images/verified-filled-out.jpg)](https://github.com/lensesio-workshops/kafkaesque_workshop/blob/main/images/verfied-filled-out.jpg)
+[![screenshot of Community Edition verified screen filled out](https://github.com/lensesio-workshops/kafkaesque_workshop/blob/main/images/verfied-filled-out.jpg)
 
 Now that you're all logged in, the Lenses help screen will pop up. It has helpful links to support and our questions forum. It also has a link to our Community Slack, you should join! But for now just click on Let's Start! 
 
