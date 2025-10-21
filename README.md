@@ -30,7 +30,7 @@ When you first log in to the UI you are at the HQ level of Lenses. At this level
 
 ![screenshot of Lenses HQ sidebar](/images/HQ-sidebar.png)
 
-For this class however, we will be working one level down on an individual cluster, known as the Workspace level. From the HQ level you can drill down into an individual cluster by hovering over an entry in the list and then clicking on the arrow that appears on the far right of the entry. 
+Go ahead and click on the Topics link. Here we can see all the topics in all the clusters. These topics are fully searchable. 
 
 ![screenshot of Lenses Environments with the drilldown arrow showing](/images/drill-down-to-work.png)
 
