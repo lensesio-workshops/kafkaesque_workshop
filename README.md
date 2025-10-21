@@ -32,21 +32,17 @@ When you first log in to the UI you are at the HQ level of Lenses. At this level
 
 Go ahead and click on the Topics link. Here we can see all the topics in all the clusters. These topics are fully searchable. 
 
-![screenshot of Lenses Environments with the drilldown arrow showing](/images/drill-down-to-work.png)
+![screenshot of topics view](https://github.com/lensesio-workshops/kafkaesque_workshop/blob/main/images/topics-view.jpg)
 
-### Lab 2 - Working with Workspaces / Individual Clusters
+Scroll over to the right to see all the different fields in the topics you can see. 
 
-Now that we've drilled down into our Kafka cluster we are at the main view of the Cluster/Workspace. This view will give you information about the overall state of the cluster and the data flows. 
-
-![screenshot of Lenses Workspace dashboard](/images/dashboard1.png)
-
-Let's take a look at the topics in cluster by clicking on the Topics link in the sidebar. You can browse and drill down into individual topics here as well as search topics and schemas by keyword. 
+You can browse and drill down into individual topics here as well as search topics and schemas by keyword. 
 
 Scenario: You're helping a coworker build a status dashboard for company executives. He told you that executives like dashboards with maps so he's looking for data streams with location data in them to use for his dashboard. 
 
-Let's do a few searches to figure out which topics have location data for him to use. In the search bar for topics type in the keyword "latitude". Be sure that "Search in Schema" is checked. Your results should look something like this:
+Let's do a few searches to figure out which topics have location data for him to use. In the search bar for topics type in the keyword "longitude". You'll notice that three topics come up, none of them have "longitude" in their title. That's because Lenses searches inside the schemas as well. Click on Search in Schema to bring up the actual key names that Lenses surfaced. 
 
-![screenshot of Topics search results](/images/latitude-search.png)
+![screenshot of Topics search results](images/search-in-schema.jpg)
 
 Now you can point your coworker quickly in the right direction for his executive dashboards.
 
