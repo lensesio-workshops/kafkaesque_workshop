@@ -14,7 +14,7 @@ Password:  admin
 
 The next screen you will see will ask you to verify your email. No need for this training, though you are welcome to do it if you like.
 
-![screenshot of Community Edition login page](https://github.com/lensesio-workshops/Community_Lenses_Setup/blob/main/images/verified.jpg)
+![screenshot of Community Edition login page](https://github.com/lensesio-workshops/kafkaesque_workshop/blob/main/images/verified.jpg)
 
 Click on Already verified? And enter the following:
 
