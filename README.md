@@ -1,159 +1,144 @@
-# Hands-on Labs for Lenses 6
+# Hands-on Labs for Lenses 6.1
 
-### Lab 1 - Login and Familiarize Yourself With the UI
+## Lab 1 - Lenses UI Orientation
 
-Using your student lab sheet point your favorite web browser to the IP address listed.
+### Login
 
-`https://studentXX.lenses-edu.com` the XX's here are your student number. You have to replace them with your student number
+Using your student lab sheet point your favorite web browser to the URL listed.
 
-![screenshot of Community Edition login page](https://github.com/lensesio-workshops/Community_Lenses_Setup/blob/main/images/login_page.png)
+`https://studentXX-hq.lenses.training` (replace the XX with your student number)
 
 User name: admin
 
-Password:  admin
+Password: $tudentXX (replace the XX with your student number)
 
-The next screen you will see will ask you to verify your email. No need for this training, though you are welcome to do it if you like.
+Now that you're all logged in, the Lenses help screen will pop up. It has helpful links to support and our questions forum. It also has a link to our Community Slack, you should join! But for now just click on Let's Start!
 
-![screenshot of Community Edition login page](https://github.com/lensesio-workshops/kafkaesque_workshop/blob/main/images/verified.jpg)
+### Navigating Connected Kafka Environments
 
-Click on Already verified? And enter the following:
+When you first log in to the UI you are at the HQ level of Lenses. At this level you can work with multiple Kafka clusters at the same time from a single unified interface. You can search for clusters by name or search across all clusters' topics and schemas by keywords. You can also use the Global SQL Studio at this level. You can access these views via the icons down the side of the UI.
 
-Email: drew.oetzel@lenses.io
+Take a moment to explore the sidebar. Notice how all your connected Kafka environments are visible from a single pane of glass. The HQ federates calls to Agents sitting close to each cluster, but the data stays local.
 
-Activation Code: 1131
+### Browsing and Searching Topics
 
-[![screenshot of Community Edition verified screen filled out](https://github.com/lensesio-workshops/kafkaesque_workshop/blob/main/images/verfied-filled-out.jpg)
+Go ahead and click on the Topics link. Here we can see all the topics in all the clusters. These topics are fully searchable.
 
-Now that you're all logged in, the Lenses help screen will pop up. It has helpful links to support and our questions forum. It also has a link to our Community Slack, you should join! But for now just click on Let's Start! 
+Scroll over to the right to see all the different fields in the topics you can see.
 
-When you first log in to the UI you are at the HQ level of Lenses. At this level you can work with multiple Kafka clusters at the same time. You can search for clusters by name or search across all clusters' topics and schemas by key words. You can also use the Global SQL Studio at this level. You can access these views via the icons down the side of the UI. 
+You can browse and drill down into individual topics here as well as search topics and schemas by keyword.
 
-![screenshot of Lenses HQ sidebar](/images/HQ-sidebar.png)
+**Scenario:** You're helping a coworker build a status dashboard for company executives. He told you that executives like dashboards with maps so he's looking for data streams with location data in them to use for his dashboard.
 
-Go ahead and click on the Topics link. Here we can see all the topics in all the clusters. These topics are fully searchable. 
-
-![screenshot of topics view](https://github.com/lensesio-workshops/kafkaesque_workshop/blob/main/images/topics-view.jpg)
-
-Scroll over to the right to see all the different fields in the topics you can see. 
-
-You can browse and drill down into individual topics here as well as search topics and schemas by keyword. 
-
-Scenario: You're helping a coworker build a status dashboard for company executives. He told you that executives like dashboards with maps so he's looking for data streams with location data in them to use for his dashboard. 
-
-Let's do a few searches to figure out which topics have location data for him to use. In the search bar for topics type in the keyword "longitude". You'll notice that three topics come up, none of them have "longitude" in their title. That's because Lenses searches inside the schemas as well. Click on Search in Schema to bring up the actual key names that Lenses surfaced. 
-
-![screenshot of Topics search results](images/search-in-schema.jpg)
+Let's do a few searches to figure out which topics have location data for him to use. In the search bar for topics type in the keyword "longitude". You'll notice that topics come up that don't have "longitude" in their title. That's because Lenses searches inside the schemas as well. Click on Search in Schema to bring up the actual key names that Lenses surfaced.
 
 Now you can point your coworker quickly in the right direction for his executive dashboards.
 
-### Lab 2 - Working with SQL Studio
+### Using SQL Studio for Ad-Hoc Topic Querying
 
-Lenses comes with a handy SQL Studio desgined to allow you to explore and manupliate your topics all from one central locaiton. Hover over the nyc_yellow_taxi_trip_data topic and click on the SQL button. This will open up that topic in the SQL Studio. 
+Lenses comes with a SQL Studio designed to allow you to explore and manipulate your topics all from one central location. Hover over the `nyc_yellow_taxi_trip_data` topic and click on the SQL button. This will open up that topic in the SQL Studio.
 
 Lenses will automatically run a simple search that surfaces the last 10 events from each partition in the topic. You can view the events in Grid form, but you can also toggle to List to see them more in a JSON style format. Take a look at the different events in the list below.
 
-Now we're going to craft a search that focuses on just the vendors, their fares, and what type of payment was used. 
+Now we're going to craft a search that focuses on just the vendors, their fares, and what type of payment was used.
 
-Delete the search that was initially run and type in the following. 
+Delete the search that was initially run and type in the following.
 
-```
+```sql
 SELECT VendorID, fare_amount, payment_type
 FROM nyc_yellow_taxi_trip_data
 ```
 
 Once you have it typed in, click on the time range picker on the right hand side and click on the "Last 5 Minutes" selection. This will automatically add a time range limiter to your search and run the search.
 
-Your results should look something like this:
+Take note of the autocomplete feature as you type. SQL Studio will suggest topic names, field names, and SQL keywords. Use it aggressively, it saves a lot of time.
 
-![screenshot of search results](images/search-results.jpg)
+### Viewing Schemas, Configurations, and Connected Consumers
 
-Scenario: You are building a application that looks for taxi fare fraud in the system. Let's use SQL Studio to search for events that could be fradulent. For example a trip with a distance of 0 but a fare amount greater than 0.
+Before we move on, let's explore what else you can see from the topic view. Navigate back to Topics and drill down into the `nyc_yellow_taxi_trip_data` topic.
 
-Craft the following search in SQL studio and hit run:
+From the topic detail view you can see:
 
-```
+- **Schema**: The Avro/JSON/Protobuf schema attached to the topic (if any). This is searchable from the HQ level, which is how our "longitude" search worked earlier.
+- **Configuration**: The topic-level Kafka configs like retention, partitions, replication factor, etc.
+- **Consumers**: Any consumer groups currently connected to this topic and their lag.
+
+Spend a few minutes clicking through these tabs to get a feel for the information available.
+
+---
+
+## Lab 2 - SQL Snapshot Deep Dive
+
+In this lab we're going to dig into SQL Snapshot, the point-in-time query engine in Lenses. Remember from the lecture: SQL Snapshot behaves like a Kafka consumer. By default it starts reading from the oldest event in the topic and works its way forward. This matters when you're working with large topics.
+
+### Craft a Needle-in-a-Haystack Search
+
+A needle-in-a-haystack search is when you know exactly what you're looking for. You have a specific record, ID, or value in mind and you want to find it.
+
+**Scenario:** You are building an application that looks for taxi fare fraud in the system. Let's use SQL Studio to search for events that could be fraudulent. For example a trip with a distance of 0 but a fare amount greater than 0.
+
+Open up `nyc_yellow_taxi_trip_data` in SQL Studio and craft the following search:
+
+```sql
 SELECT *
 FROM nyc_yellow_taxi_trip_data
 WHERE trip_distance = 0 AND fare_amount > 0
 LIMIT 100;
 ```
 
-Looks like there's a lot of possible fraud for our new application to surface!! 
+Hit run and take a look at the results. Looks like there's a lot of possible fraud for our new application to surface!
 
+Notice a few things about this query:
 
-We have a comprehensive guide to the Lenses SQL Studio [here in the docs](https://docs.lenses.io/latest/user-guide/sql-studio). It's quite powerful and can even be used to create new topics based on SQL output.
+1. We used a specific WHERE clause to target exactly the records we wanted. This is the needle-in-a-haystack pattern.
+2. We used `LIMIT 100` to control the result set size. Remember, the default LIMIT is 10,000 but we don't need that many to prove our point.
 
-### Lab 3 - Working with Data Policies
+### Craft a Broad-Based Statistical Search
 
-Kafka streams are full of different types of sensitive data: customer data, internal data, etc. Lenses give you the ability to easily mask this data from full view by your engineers while still allowing them full access to the Topics for discovery and troubleshooting. 
+A broad-based search is when you want to understand the shape of your data. You're not looking for a specific record, you're looking at aggregates and patterns.
 
-Let's setup a data policy to mask the serial number data that is currently visibile in our data. If you take a look inside the `backblaze_smart` topic you'll see the serial numbers shown fully. 
+Let's run a broader query to understand the distribution of payment types across our taxi data:
 
-![screenshot of the unmasked serial number](/images/unmasked-serial.png)
-
-Go to the Data Policies section of your Workspace and click on the New Policy button. Fill out the form:
-
-Name: Serial Screening
-Redaction: All
-Category: Brand Security (Be sure to hit return here to move on the to next field, otherwise the UI will complain.)
-Impact Type: Medium
-Affected Datasets: Do not change. Leave as "*"
-Add Fields: serial_number (Be sure to hit return here to move on the to next field, otherwise the UI will complain.)
-
-![screenshot of policy dialog box](/images/policy-box.png)
-
-When you're all done hit the Create New Policy button. Then go back to your topics view and drill down `backblaze_smart` and check to make sure that your serial number field is now being blocked. 
-
-![screenshot of blocked serial number](/images/blocked-serial.png)
-
-### Lab 4 - Filtering a Poison Pill
-
-Scenario: The taxi fare app has been glitching and recording fares with negative amounts. We need to find these events and filter them out of our taxi fare data and send them to a special topic so they can be reprocessed with the correct fare amount. 
-
-First let's identify all the events with negative fare amounts. Open up the nyc_yellow_taxi_trip_data in SQL Studio and run the following command: 
-
+```sql
+SELECT payment_type, count(*) as total
+FROM nyc_yellow_taxi_trip_data
+GROUP BY payment_type
 ```
+
+This gives us a statistical view of the data, which payment types are most common.
+
+### Working with SQL Snapshot Limits
+
+Now let's see those built-in limits in action. Remember, SQL Snapshot is a Kafka consumer and it has limits that prevent runaway queries.
+
+Try running a query without a LIMIT clause on a larger scan:
+
+```sql
 SELECT *
 FROM nyc_yellow_taxi_trip_data
-WHERE fare_amount < 0
+WHERE fare_amount > 50
 ```
 
-There are quite a few "poison pill" events in our feed. Let's build a Lenses SQL Processor to send them off to a special DLQ (dead letter queue) where they can be reprocessed and corrected. 
+Watch what happens. The query will eventually stop, either because it hit the default `max.size` (20MB), `max.query.time` (1 hour), `max.idle.time` (5 seconds of no new records), or the default `LIMIT` of 10,000 records.
 
-To do this we will need to drill down into the cluster. Leave SQL Studio and drill down into the specific cluster level. Then click on Apps. This will take you to the Apps page where you can add and manage external applications that interact with Kafka. 
+You can override these limits with SET statements. Try increasing the max size:
 
-Click on the "Create SQL Processor" button to start to make our new SQL processor. 
+```sql
+SET max.size = '100m';
 
-First up give your SQL Processor a name: taxi-poison-pill-filter
-
-Then we will add the following SQL statement:
-
-```
--- Create target topic(s) if they do not exist
-SET defaults.topic.autocreate=true;
-
-INSERT INTO taxi-negative-fares
-SELECT STREAM *
+SELECT *
 FROM nyc_yellow_taxi_trip_data
-WHERE fare_amount < 0;
+WHERE fare_amount > 50
+LIMIT 500;
 ```
-Then click on Create Processor. Note we are using demo Community Edition, normally in the "real world" SQL Processors get deployed to Kubernetes. 
 
-Once the processor has been created click on the big green button that says "Start Processor" and watch as it comes to life.
+Here's the full list of limits you can adjust:
 
-Once the process is running, you can go and check on the new topic. You should now see a new topic called taxi-negative-fares in your topics list. Hover over it and click on SQL. This will bring up a smapling of the events in our new topic. Note that they all have negative fare amounts. 
+| Limit | Default | Example |
+|-------|---------|---------|
+| `max.size` | 20MB | `SET max.size = '1g';` |
+| `max.query.time` | 1 hour | `SET max.query.time = '60000ms';` |
+| `max.idle.time` | 5 seconds | `SET max.idle.time = '5s';` |
+| `LIMIT N` | 10,000 | `SELECT * FROM payments LIMIT 100;` |
 
-![value fare amount view](images/value-fare-amount.jpg)
-
-Nice work, now we can send those bad events to be reprocessed.
-
-When you create a SQL Processor in Lenses it automatically adds it to the Topology View. Drill back down into your cluster and click on Topology. You should now see your SQL Processor with its source topic and its destination topic. 
-
-![topology view](images/topology.jpg)
-
-### Challenge Lab - Filtering a Poison Pill
-
-Build a SQL Processor that filters only the non-poison pill events so our consumers don't get harmed by the tainted main topic. 
-
-
-
+We have a comprehensive guide to the Lenses SQL Studio [here in the docs](https://docs.lenses.io/latest/user-guide/sql-studio). It's quite powerful and can even be used to create new topics based on SQL output.
